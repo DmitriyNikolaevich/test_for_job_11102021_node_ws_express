@@ -1,0 +1,26 @@
+{
+  "name": "test_for_job_11102021_node_ws_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitriyNikolaevich/test_for_job_11102021_node_ws_express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DmitriyNikolaevich/test_for_job_11102021_node_ws_express/issues"
+  },
+  "homepage": "https://github.com/DmitriyNikolaevich/test_for_job_11102021_node_ws_express#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13",
+    "socket.io": "^4.2.0"
+  }
+}
