@@ -2,16 +2,7 @@ const express = require('express');
 const PORT = process.env.PORT || 3500;
 const app = express();
 const path = require('path');
-const server = require('http').Server(app)
-    .use(cors({
-        'allowedHeaders': ['sessionId', 'Content-Type'],
-        'exposedHeaders': ['sessionId'],
-        'origin': '*',
-        'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        'preflightContinue': false
-    }))
-    .use((req, res) => res.sendFile('/index.html', { root: __dirname }))
-    .listen(PORT, () => console.log(`Listening on ${PORT}`));
+const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const cors = require('cors');
