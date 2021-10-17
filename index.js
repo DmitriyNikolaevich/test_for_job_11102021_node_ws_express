@@ -1,9 +1,11 @@
 const express = require('express');
+const PORT = process.env.PORT || 3500;
 const app = express();
 const path = require('path');
-const server = require('http').Server(app);
+const server = require('http').Server(app)
+    .use((req, res) => res.sendFile('/index.html', { root: __dirname }))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`));
 const io = require('socket.io')(server);
-const port = process.env.PORT || 3500;
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -43,8 +45,8 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     // });
 };
 
-app.listen(port, () => {
-    console.log(`Server listen on port ${port}`)
+app.listen(PORT, () => {
+    console.log(`Server listen on port ${PORT}`)
 });
 
 io.on('connection', (socket) => {
