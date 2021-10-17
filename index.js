@@ -1,10 +1,9 @@
 const express = require('express');
 const PORT = process.env.PORT || 3500;
+const httpProxy = require('http-proxy');
 const app = express();
 const path = require('path');
-const server = require('http').Server(app).listen(8000, () => {
-    console.log('WS');
-});
+const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const cors = require('cors');
