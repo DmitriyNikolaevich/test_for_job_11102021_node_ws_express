@@ -42,17 +42,19 @@ app.listen(port, () => {
 });
 
 io.on('connection', (socket) => {
-    console.log(`WS start`)
-
+    console.log('open')
     socket.emit('chatHistory', chatHistory);
+
+    socket.on('connectedUser', data => {
+        socket.broadcast.emit('connectedUser', data)
+    })
 
     socket.on('newMessage', (data) => {
         socket.broadcast.emit('newMessage', data);
         chatHistory.push(data)
     });
 
-    socket.on('disconnect', (data) => {
-        console.log(`WS stop`)
-    });
-
+    socket.on('disconect', () => {
+        console.log('close')
+    })
 });
