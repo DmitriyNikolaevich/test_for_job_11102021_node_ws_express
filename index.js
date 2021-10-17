@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const server = require('http').Server(app).listen(3600);
+const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const port = process.env.PORT || 3500;
 const bodyParser = require('body-parser');
