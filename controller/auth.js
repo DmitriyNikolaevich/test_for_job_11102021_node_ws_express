@@ -37,4 +37,7 @@ exports.auth = (req, res) => {
         : (users.some(x => x.name === data.login) && users.filter(x => x.name === data.login)[0].pass === +data.pass)
             ? response.status200({ isAuth: true, errorMessage: '', userName: users.filter(x => x.name === data.login)[0].name }, res)
             : response.status200({ isAuth: false, errorMessage: "Maybe 'Swordfish'?", userName: '' }, res)
+
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept')
 }
