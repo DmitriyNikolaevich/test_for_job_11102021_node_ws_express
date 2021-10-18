@@ -1,11 +1,8 @@
 const express = require('express');
-const PORT = process.env.PORT || 3500;
-const httpProxy = require('http-proxy');
+const PORT = process.env.PORT || 3600;
 const app = express();
-
 const server = require('http').Server(app).listen(443);
 const io = require('socket.io')(server);
-const port = process.env.PORT || 3600;
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
