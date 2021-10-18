@@ -4,7 +4,7 @@ const httpProxy = require('http-proxy');
 const app = express();
 const path = require('path');
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server).listen(3333);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
