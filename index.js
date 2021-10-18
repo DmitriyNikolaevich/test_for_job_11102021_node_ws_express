@@ -2,9 +2,11 @@ const express = require('express');
 const PORT = process.env.PORT || 3500;
 const httpProxy = require('http-proxy');
 const app = express();
-const path = require('path');
-const server = require('http').Server(app);
-const io = require('socket.io')(server).listen(3333);
+
+const server = require('http').Server(app).listen(443);
+const io = require('socket.io')(server);
+const port = process.env.PORT || 3600;
+
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -20,28 +22,10 @@ app.use(cors({
 app.options('*', cors());
 
 const routes = require('./settings/routes');
-const chatHistory = [
-    {
-        message: 'message',
-        userName: 'User 1'
-    },
-    {
-        message: 'message',
-        userName: 'User 2'
-    },
-    {
-        message: 'message',
-        userName: 'User 3'
-    }
-];
 routes(app);
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-    app.use(express.static(path.join(__dirname, 'build')));
-
-    // app.get('*', function (req, res) {
-    //     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    // });
+    app.use(express.static(path.join(__dirname, 'client/build')));
 };
 
 app.listen(PORT, () => {
@@ -49,8 +33,7 @@ app.listen(PORT, () => {
 });
 
 io.on('connection', (socket) => {
-    console.log('open')
-    socket.emit('chatHistory', chatHistory);
+    console.log('open');
 
     socket.on('connectedUser', data => {
         socket.broadcast.emit('connectedUser', data)
@@ -58,10 +41,9 @@ io.on('connection', (socket) => {
 
     socket.on('newMessage', (data) => {
         socket.broadcast.emit('newMessage', data);
-        chatHistory.push(data)
     });
 
     socket.on('disconect', () => {
         console.log('close')
-    })
+    });
 });
